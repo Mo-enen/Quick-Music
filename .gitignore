@@ -1,6 +1,6 @@
 .vs/
 .github/
-obj
+obj/
 bin/
 *.vsconfig
 *.editorconfig
