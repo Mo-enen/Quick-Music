@@ -1,8 +1,9 @@
 .vs/
 .github/
-obj/
+obj
 bin/
 *.vsconfig
 *.editorconfig
 *.ini
 Properties/
+/bin/Release/

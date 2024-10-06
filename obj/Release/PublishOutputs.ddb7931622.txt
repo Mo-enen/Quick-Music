@@ -1,1 +1,0 @@
-C:\Data\C#\QuickMusic\bin\Release\net8.0\publish\win-x64\QuickMusic.exe

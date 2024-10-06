@@ -62,6 +62,18 @@
 
 
 	<ItemGroup>
+	  <None Remove="Icon.png" />
+	</ItemGroup>
+
+
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Icon.png" />
+	</ItemGroup>
+
+
+
+	<ItemGroup>
 		<Reference Include="raylib-cs">
 			<HintPath>raylib-cs.dll</HintPath>
 		</Reference>
