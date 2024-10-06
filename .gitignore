@@ -1,0 +1,8 @@
+.vs/
+.github/
+obj/
+bin/
+*.vsconfig
+*.editorconfig
+*.ini
+Properties/
