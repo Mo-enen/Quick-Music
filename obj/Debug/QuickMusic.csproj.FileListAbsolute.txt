@@ -1,0 +1,11 @@
+C:\Data\C#\QuickMusic\bin\Debug\raylib.dll
+C:\Data\C#\QuickMusic\bin\Debug\QuickMusic.exe
+C:\Data\C#\QuickMusic\bin\Debug\QuickMusic.runtimeconfig.json
+C:\Data\C#\QuickMusic\bin\Debug\QuickMusic.dll
+C:\Data\C#\QuickMusic\bin\Debug\raylib-cs.dll
+C:\Data\C#\QuickMusic\obj\Debug\QuickMusic.csproj.AssemblyReference.cache
+C:\Data\C#\QuickMusic\obj\Debug\QuickMusic.GeneratedMSBuildEditorConfig.editorconfig
+C:\Data\C#\QuickMusic\obj\Debug\QuickMusic.csproj.CoreCompileInputs.cache
+C:\Data\C#\QuickMusic\obj\Debug\QuickMusic.csproj.Up2Date
+C:\Data\C#\QuickMusic\obj\Debug\QuickMusic.dll
+C:\Data\C#\QuickMusic\obj\Debug\QuickMusic.genruntimeconfig.cache

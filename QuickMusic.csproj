@@ -1,0 +1,76 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net8.0</TargetFramework>
+
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+		<ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+		<StartupObject></StartupObject>
+		<RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
+		<RunAnalyzersDuringLiveAnalysis>True</RunAnalyzersDuringLiveAnalysis>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<EnableNETAnalyzers>False</EnableNETAnalyzers>
+		<GenerateDependencyFile>false</GenerateDependencyFile>
+		<GenerateDocumentationFile>False</GenerateDocumentationFile>
+		<ErrorReport>none</ErrorReport>
+		<GenerateAssemblyInfo>False</GenerateAssemblyInfo>
+		<Optimize>True</Optimize>
+
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+		<AnalysisLevel>latest-recommended</AnalysisLevel>
+		<ApplicationIcon>Icon.ico</ApplicationIcon>
+
+		<DebugType>none</DebugType>
+
+
+
+
+
+
+
+	</PropertyGroup>
+
+
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+
+		<OutputType>WinExe</OutputType>
+		<GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+		<PublishSingleFile>true</PublishSingleFile>
+		<SelfContained>true</SelfContained>
+		<PublishTrimmed>false</PublishTrimmed>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<IncludeAllContentForSelfExtract>false</IncludeAllContentForSelfExtract>
+		<PublishReadyToRun>False</PublishReadyToRun>
+		<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+		<EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+
+	</PropertyGroup>
+
+
+
+	<ItemGroup>
+	  <Compile Remove="Properties\**" />
+	  <EmbeddedResource Remove="Properties\**" />
+	  <None Remove="Properties\**" />
+	</ItemGroup>
+
+
+
+	<ItemGroup>
+		<Reference Include="raylib-cs">
+			<HintPath>raylib-cs.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="raylib.dll">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+</Project>

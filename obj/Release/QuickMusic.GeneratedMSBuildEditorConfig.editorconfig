@@ -1,0 +1,9 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = true
+build_property.EnableTrimAnalyzer = true
+build_property.IncludeAllContentForSelfExtract = false
+build_property.RootNamespace = QuickMusic
+build_property.ProjectDir = C:\Data\C#\QuickMusic\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = false
