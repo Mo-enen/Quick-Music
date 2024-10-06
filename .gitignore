@@ -5,5 +5,3 @@ bin/
 *.vsconfig
 *.editorconfig
 *.ini
-Properties/
-/bin/Release/
