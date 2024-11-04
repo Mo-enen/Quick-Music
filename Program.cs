@@ -5,6 +5,8 @@ using System.Text;
 using Raylib_cs;
 using System.Reflection;
 using System.IO;
+using System.Threading.Tasks;
+using System.Threading;
 
 
 // ======== Init ========
@@ -107,6 +109,7 @@ if (stream != null) {
 	FocusScrollToPlayingMusic();
 }
 
+
 while (!Raylib.WindowShouldClose()) {
 
 	// Update Music
@@ -152,6 +155,8 @@ while (!Raylib.WindowShouldClose()) {
 		const int ITEM_PADDING = 6;
 		int screenWidth = Raylib.GetScreenWidth();
 		int screenHeight = Raylib.GetScreenHeight();
+		WindowWidth = screenWidth;
+		WindowHeight = screenHeight;
 		var mousePos = Raylib.GetMousePosition();
 		bool mouseLeftPressed = Raylib.IsMouseButtonPressed(MouseButton.Left);
 		bool mouseLeftHolding = Raylib.IsMouseButtonDown(MouseButton.Left);
@@ -162,7 +167,7 @@ while (!Raylib.WindowShouldClose()) {
 		// Play List
 		if (PlayLists.Count > 0) {
 			int pageCount = (screenHeight - BOTTOM_BAR_HEIGHT) / (ITEM_HEIGHT + ITEM_PADDING);
-			PlayListScrollY = Math.Clamp(PlayListScrollY, 0, Math.Max(PlayLists.Count - pageCount + 6, 0));
+			PlayListScrollY = Math.Clamp(PlayListScrollY, 0, Math.Max(PlayLists.Count - pageCount + 2, 0));
 			Raylib.DrawRectangle(0, 0, screenWidth / 3, screenHeight, Color.Black);
 			for (int i = PlayListScrollY; i < PlayLists.Count; i++) {
 				int y = 20 + (i - PlayListScrollY) * (ITEM_HEIGHT + ITEM_PADDING);
@@ -209,7 +214,7 @@ while (!Raylib.WindowShouldClose()) {
 			var list = PlayLists[UiListIndex];
 			if (list.Musics.Count > 0) {
 				int pageCount = (screenHeight - BOTTOM_BAR_HEIGHT) / (ITEM_HEIGHT + ITEM_PADDING);
-				MusicListScrollY = Math.Clamp(MusicListScrollY, 0, Math.Max(list.Musics.Count - pageCount + 6, 0));
+				MusicListScrollY = Math.Clamp(MusicListScrollY, 0, Math.Max(list.Musics.Count - pageCount + 2, 0));
 				for (int i = MusicListScrollY; i < list.Musics.Count; i++) {
 					var (path, name) = list.Musics[i];
 					int y = 20 + (i - MusicListScrollY) * (ITEM_HEIGHT + ITEM_PADDING);
@@ -257,17 +262,15 @@ while (!Raylib.WindowShouldClose()) {
 					90, ppH, 0, Color.RayWhite
 				);
 			} else {
-				Raylib.DrawTextPro(
-					DefaultFont, ">",
-					new(ppL + ppW * 0.85f, ppT + ppH * 0.5f),
-					new(ppW / 2f, ppH / 2f),
-					0, ppH, 0, Color.RayWhite
-				);
-				Raylib.DrawTextPro(
-					DefaultFont, "|",
-					new(ppL + ppW * 0.82f, ppT + ppH * 0.7f),
-					new(ppW / 2f, ppH / 2f),
-					0, ppH * 0.565f, 0, Color.RayWhite
+				int triL = ppL + ppW * 4 / 10;
+				int triR = ppL + ppW * 7 / 10;
+				int triD = ppT + ppH * 3 / 10;
+				int triU = ppT + ppH * 7 / 10;
+				Raylib.DrawTriangle(
+					new(triL, triD),
+					new(triL, triU),
+					new(triR, (triD + triU) / 2),
+					Color.RayWhite
 				);
 			}
 			if (ppBtnHovering && mouseLeftPressed) {
@@ -307,7 +310,7 @@ while (!Raylib.WindowShouldClose()) {
 			// Scroll with Mouse Wheel
 			float wheel = Raylib.GetMouseWheelMove();
 			if (Math.Abs(wheel) > 0.1f) {
-				if (mousePos.X < screenWidth / 2) {
+				if (mousePos.X < screenWidth / 3) {
 					// For Play List
 					PlayListScrollY -= (int)wheel;
 				} else {
@@ -321,6 +324,7 @@ while (!Raylib.WindowShouldClose()) {
 
 	// Finish
 	Raylib.EndDrawing();
+
 }
 
 
@@ -331,8 +335,13 @@ while (!Raylib.WindowShouldClose()) {
 // Save Config
 {
 	var builder = new StringBuilder();
-	builder.AppendLine($"WindowWidth:{Raylib.GetScreenWidth()}");
-	builder.AppendLine($"WindowHeight:{Raylib.GetScreenHeight()}");
+	if (!Raylib.IsWindowMinimized()) {
+		builder.AppendLine($"WindowWidth:{Raylib.GetScreenWidth()}");
+		builder.AppendLine($"WindowHeight:{Raylib.GetScreenHeight()}");
+	} else {
+		builder.AppendLine($"WindowWidth:{WindowWidth}");
+		builder.AppendLine($"WindowHeight:{WindowHeight}");
+	}
 	builder.AppendLine($"LastPlayingList:{PlayingListIndex}");
 	Util.TextToFile(builder.ToString(), ConfigPath, Encoding.UTF8);
 }
@@ -385,7 +394,7 @@ bool PlayMusic (string path) {
 	}
 	CurrentMusic = Raylib.LoadMusicStream(path);
 	Raylib.PlayMusicStream(CurrentMusic);
-	Raylib.SetWindowTitle(Util.GetNameWithoutExtension(path));
+	Raylib.SetWindowTitle(" " + Util.GetNameWithoutExtension(path));
 	return true;
 }
 
@@ -405,7 +414,6 @@ public class PlayList {
 }
 
 static class Util {
-
 
 	// File
 	public static void TextToFile (string data, string path, Encoding encoding, bool append = false) {

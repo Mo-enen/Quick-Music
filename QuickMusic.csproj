@@ -55,14 +55,23 @@
 
 	<ItemGroup>
 	  <Compile Remove="Properties\**" />
+	  <Compile Remove="Res\**" />
 	  <EmbeddedResource Remove="Properties\**" />
+	  <EmbeddedResource Remove="Res\**" />
 	  <None Remove="Properties\**" />
+	  <None Remove="Res\**" />
 	</ItemGroup>
 
 
 
 	<ItemGroup>
+	  <None Remove=".editorconfig" />
+	  <None Remove=".gitattributes" />
+	  <None Remove=".gitignore" />
+	  <None Remove="Icon.ico" />
 	  <None Remove="Icon.png" />
+	  <None Remove="LICENSE" />
+	  <None Remove="README.md" />
 	</ItemGroup>
 
 
@@ -83,6 +92,10 @@
 		<None Update="raylib.dll">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EditorConfigFiles Remove="C:\Data\C#\QuickMusic\.editorconfig" />
 	</ItemGroup>
 
 </Project>
